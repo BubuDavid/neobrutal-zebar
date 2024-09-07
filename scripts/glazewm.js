@@ -38,6 +38,20 @@ const iconMap = {
   azuredatastudio: { icon: "ti-database" },
 };
 
+// Rewrite the workspaceIconMap to use only one icon
+const workspaceIconMap = {
+  "1": "ti-terminal-2",
+  "2": "ti-brand-chrome",
+  "3": "ti-briefcase-filled",
+  "4": "ti-brand-github-copilot",
+  "5": "ti-brand-whatsapp",
+  "6": "ti-point",
+  "7": "ti-point",
+  "8": "ti-point",
+  "9": "ti-headphones-filled",
+  "0": "ti-gift-filled"
+};
+
 export const focusWorkspace = (event, context) => {
   const id = event.target.id;
   context.providers.glazewm.focusWorkspace(id);
@@ -47,6 +61,18 @@ const addProcessIconCallback = (mutationsList) => {
   for (const mutation of mutationsList) {
     if (mutation.type === "childList") {
       const node = document.querySelector("#process-container");
+      const iconNames = document.querySelectorAll("button.workspace");
+      for (const iconName of iconNames) {
+        const IconClasses = iconName.children[0].classList;
+        const currentId = iconName.id;
+        // Check if the icon is ti-point-filled or ti-point or ti-circle
+        if (currentId in workspaceIconMap) {
+          IconClasses.remove("ti-point-filled");
+          IconClasses.remove("ti-point");
+          IconClasses.remove("ti-circle");
+          IconClasses.add(workspaceIconMap[currentId]);
+        }
+      }
       if (node) {
         const iconNodes = node.querySelectorAll(".ti");
 

@@ -12,7 +12,7 @@ window/bar:
   global_styles: |
     @import "https://www.nerdfonts.com/assets/css/webfont.css";
     @import "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css";
-    @import "http://asset.localhost/>> PATH TO YOUR YOUR GLZR CONFIG FOLDER <<.glzr%5Czebar%5Cstyles%5Cglobal.css";
+    @import "http://asset.localhost/C%3A%2FUsers%2Fdavid%2F.glzr%5Czebar%5Cstyles%5Cglobal.css";
 
   group/left:
     template/menu:
@@ -71,26 +71,26 @@ window/bar:
           </span>
         </div>
 
-    template/battery:
-      providers: ["battery"]
-      template: |
-        <div class="
-            @switch (true) {
-              @case (Math.round(battery.chargePercent) === 100) { full }
-              @case (Math.round(battery.chargePercent) > 80) { good }
-              @case (Math.round(battery.chargePercent) > 50) { mid }
-              @case (Math.round(battery.chargePercent) > 25) { low }
-              @default { critical }
-            }
-          ">
-            <i class="{{ battery.state === 'charging' ? 'charging' : '' }} ti ti-bolt"></i>
-            <span class="label">
-              {{ Math.round(battery.chargePercent) }}%
-            </span>
-            <span class="meter">
-              <span style="width: {{Math.round(battery.chargePercent) }}%"</span>
-            </span>
-        </div>
+    # template/battery:
+    #   providers: ["battery"]
+    #   template: |
+    #     <div class="
+    #         @switch (true) {
+    #           @case (Math.round(battery.chargePercent) === 100) { full }
+    #           @case (Math.round(battery.chargePercent) > 80) { good }
+    #           @case (Math.round(battery.chargePercent) > 50) { mid }
+    #           @case (Math.round(battery.chargePercent) > 25) { low }
+    #           @default { critical }
+    #         }
+    #       ">
+    #         <i class="{{ battery.state === 'charging' ? 'charging' : '' }} ti ti-bolt"></i>
+    #         <span class="label">
+    #           {{ Math.round(battery.chargePercent) }}%
+    #         </span>
+    #         <span class="meter">
+    #           <span style="width: {{Math.round(battery.chargePercent) }}%"</span>
+    #         </span>
+    #     </div>
 
   group/center:
     template/glazewm_workspaces:
@@ -127,15 +127,17 @@ window/bar:
       template: |
         @for (workspace of glazewm.allWorkspaces) {
           @for (child of workspace.children) {
-            @if (child?.processName === "chrome" && child?.title.toLowerCase().includes("youtube music")) {
+            @if (child?.processName === "chrome" && child?.title.includes("YouTube Music")) {
               @if (child?.title === "YouTube Music") {
                 <i class="ti ti-music-off"></i>
                   Nothing Playing
               } @else {
-                <i class="ti ti-music playing"></i>
-                <span class={{child.title.length > 62 ? "move" : ""}}>
+                @if (child?.title.includes("YouTube Music - ")) {
+                  <i class="ti ti-music playing"></i>
+                  <span class={{child.title.length > 30 ? "move" : ""}}>
                   {{ child.title.split(" - ").slice(0, 2).join(" - ") }}
-                </span>
+                  </span>
+                }
               }
             }
           }
