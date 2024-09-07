@@ -58,4 +58,8 @@
   #clock {
     padding-right: 6px;
   }
+
+  #separator {
+    rotate: -22.5deg;
+  }
 }

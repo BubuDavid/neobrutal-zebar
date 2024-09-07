@@ -12,7 +12,7 @@ window/bar:
   global_styles: |
     @import "https://www.nerdfonts.com/assets/css/webfont.css";
     @import "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css";
-    @import "http://asset.localhost/>> PATH TO YOUR YOUR GLZR CONFIG FOLDER<<.glzr%5Czebar%5Cstyles%5Cglobal.css";
+    @import "http://asset.localhost/>> PATH TO YOUR YOUR GLZR CONFIG FOLDER <<.glzr%5Czebar%5Cstyles%5Cglobal.css";
 
   group/left:
     template/menu:
@@ -22,7 +22,7 @@ window/bar:
           selector: ".dropdown-button"
       template: |
         <div class="dropdown-button">
-          <i class="ti ti-heart-filled"></i>
+          <i class="ti ti-brand-github-filled"></i>
         </div>
 
     template/dropdown:
@@ -113,7 +113,7 @@ window/bar:
         <i id="tiling-direction" class="ti ti-switch-{{glazewm.tilingDirection}}"></i>
         <div id="process-container">
           @for (child of glazewm.focusedWorkspace.children) {
-            @if (child.state.type != "minimized") {
+            @if (child.state !== null) {
               <span class="process {{ child.hasFocus && "current"}}">
                 <i class="ti" data-title="{{ child.title.toLowerCase() }}" data-process-name="{{ child.processName.toLowerCase() }}"></i>
               </span> 
@@ -127,14 +127,14 @@ window/bar:
       template: |
         @for (workspace of glazewm.allWorkspaces) {
           @for (child of workspace.children) {
-            @if (child?.processName === "Spotify") {
-              @if (child.title === "Spotify Premium") {
+            @if (child?.processName === "chrome" && child?.title.toLowerCase().includes("youtube music")) {
+              @if (child?.title === "YouTube Music") {
                 <i class="ti ti-music-off"></i>
-                nothing is playing
+                  Nothing Playing
               } @else {
                 <i class="ti ti-music playing"></i>
                 <span class={{child.title.length > 62 ? "move" : ""}}>
-                  {{ child.title }}
+                  {{ child.title.split(" - ").slice(0, 2).join(" - ") }}
                 </span>
               }
             }
@@ -177,7 +177,7 @@ window/bar:
 
     template/separator:
       template: |
-        <i class="nf nf-oct-dot_fill"></>
+        <i id="separator" class="ti ti-line"></>
 
     template/clock:
       providers: ["date"]

@@ -33,6 +33,9 @@ const iconMap = {
 
   // Ignore
   msedgewebview2: { ignore: true },
+
+  // Custom
+  azuredatastudio: { icon: "ti-database" },
 };
 
 export const focusWorkspace = (event, context) => {
@@ -50,6 +53,16 @@ const addProcessIconCallback = (mutationsList) => {
         iconNodes.forEach((iconNode) => {
           const processName = iconNode.getAttribute("data-process-name");
           const title = iconNode.getAttribute("data-title");
+
+          if (title.includes("youtube music")) {
+            iconNode.classList.add("ti-brand-youtube-filled")
+            return;
+          }
+
+          if (title.includes("league")) {
+            iconNode.classList.add("ti-device-gamepad-2")
+            return;
+          }
 
           if (!processName && !title) return;
           const process = iconMap[processName] || iconMap[title];
