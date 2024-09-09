@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
 
+
     .workspace {
       background: color-mix(in srgb, currentColor 30%, transparent);
       border: var(--border-size) solid var(--border);
@@ -27,6 +28,7 @@
       margin: 4px;
       cursor: pointer;
 
+
       &:hover {
         box-shadow: none;
         transform: translateY(var(--shadow-size-button)) translateX(var(--shadow-size-button));
@@ -37,6 +39,7 @@
       }
 
       &.focused {
+        border: 2px solid var(--text);
         animation: press 0.2s;
       }
 
