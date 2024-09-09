@@ -36,6 +36,7 @@ const iconMap = {
 
   // Custom
   azuredatastudio: { icon: "ti-database" },
+  storageexplorer: {icon: "ti-brand-azure"}
 };
 
 // Rewrite the workspaceIconMap to use only one icon
