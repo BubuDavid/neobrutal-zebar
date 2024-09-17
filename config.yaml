@@ -71,26 +71,6 @@ window/bar:
           </span>
         </div>
 
-    # template/battery:
-    #   providers: ["battery"]
-    #   template: |
-    #     <div class="
-    #         @switch (true) {
-    #           @case (Math.round(battery.chargePercent) === 100) { full }
-    #           @case (Math.round(battery.chargePercent) > 80) { good }
-    #           @case (Math.round(battery.chargePercent) > 50) { mid }
-    #           @case (Math.round(battery.chargePercent) > 25) { low }
-    #           @default { critical }
-    #         }
-    #       ">
-    #         <i class="{{ battery.state === 'charging' ? 'charging' : '' }} ti ti-bolt"></i>
-    #         <span class="label">
-    #           {{ Math.round(battery.chargePercent) }}%
-    #         </span>
-    #         <span class="meter">
-    #           <span style="width: {{Math.round(battery.chargePercent) }}%"</span>
-    #         </span>
-    #     </div>
 
   group/center:
     template/glazewm_workspaces:
@@ -143,19 +123,18 @@ window/bar:
           }
         }
 
-    template/network:
-      providers: ["network"]
+    template/separator1:
       template: |
-        @if (network.defaultInterface?.type === 'ethernet') {
-          <i class="nf nf-md-ethernet_cable"></i>
-        } @else if (network.defaultInterface?.type === 'wifi') {
-          @if (network.defaultGateway?.signalStrength >= 75) {<i class="ti ti-wifi"></i>}
-          @else if (network.defaultGateway?.signalStrength >= 50) {<i class="ti ti-wifi-2"></i>}
-          @else if (network.defaultGateway?.signalStrength >= 25) {<i class="ti ti-wifi-1"></i>}
-          @else {<i class="ti ti-wifi-0"></i>}
-          {{ network.defaultGateway?.ssid }}
-        } @else {
-          <i class="ti ti-wifi-off"></i>
+        <i class="ti ti-line separators"></>
+
+    template/pause:
+      providers: ["glazewm"]
+      template: |
+        @if (glazewm.bindingModes[0]?.name === 'pause') {
+          <i class="ti ti-parking-circle-filled"></i>
+        }
+        @else {
+          <i class="ti ti-parking-circle"></i>
         }
 
     template/weather:
@@ -175,13 +154,15 @@ window/bar:
           @case ('thunder_day') {<i class="nf nf-weather-day_lightning"></i>}
           @case ('thunder_night') {<i class="nf nf-weather-night_alt_lightning"></i>}
         }
-        {{ weather.celsiusTemp }}°
+
 
     template/separator:
       template: |
-        <i id="separator" class="ti ti-line"></>
+        <i class="ti ti-line separators"></>
 
     template/clock:
       providers: ["date"]
       template: |
-        {{ date.toFormat(date.now, 't') }}
+        {{ date.toFormat(date.now, 'LLL dd t') }}
+
+

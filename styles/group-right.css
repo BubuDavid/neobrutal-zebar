@@ -7,7 +7,6 @@
   border: 2px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-size-bar) var(--shadow-size-bar) 0 var(--shadow);
-  margin-right: 4px;
   overflow: hidden;
   white-space: nowrap;
 
@@ -20,18 +19,14 @@
   #now-playing,
   #network,
   #weather {
-    padding: 6px;
     overflow: hidden;
     white-space: nowrap;
     max-width: 25vw;
-
-    i {
-      margin-right: 7px;
-    }
   }
 
   #now-playing {
     & > i {
+      margin: 0 1rem;
       color: var(--not-playing);
       &.playing {
         color: var(--now-playing);
@@ -59,7 +54,7 @@
     padding-right: 6px;
   }
 
-  #separator {
-    rotate: -22.5deg;
+  .separators {
+    rotate: -45deg;
   }
 }

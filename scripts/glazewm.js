@@ -35,6 +35,7 @@ const iconMap = {
   msedgewebview2: { ignore: true },
 
   // Custom
+  pbidesktop: { icon: "ti-file-power"},
   azuredatastudio: { icon: "ti-database" },
   storageexplorer: {icon: "ti-brand-azure"}
 };
@@ -46,11 +47,11 @@ const workspaceIconMap = {
   "3": "ti-briefcase-filled",
   "4": "ti-brand-github-copilot",
   "5": "ti-brand-whatsapp",
-  "6": "ti-point",
-  "7": "ti-point",
-  "8": "ti-point",
-  "9": "ti-headphones-filled",
-  "0": "ti-gift-filled"
+  "6": "ti-hexagon-number-6",
+  "7": "ti-hexagon-number-7",
+  "8": "ti-hexagon-number-8",
+  "9": "ti-hexagon-number-9",
+  "0": "ti-headphones-filled"
 };
 
 export const focusWorkspace = (event, context) => {
